@@ -75,6 +75,10 @@ app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json({ message: err.message || 'Internal server error' });
 });
 
-app.listen(port, () => {
-  console.log(`LearnSphere API listening on http://localhost:${port}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`LearnSphere API listening on http://localhost:${port}`);
+  });
+}
+
+export default app;
