@@ -1,11 +1,11 @@
 import express from 'express';
 import { query } from '../db.js';
-import { authenticate } from '../middleware/auth.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
 // GET note for a specific lesson
-router.get('/:lessonId', authenticate, async (req, res) => {
+router.get('/:lessonId', requireAuth(), async (req, res) => {
   try {
     const { lessonId } = req.params;
     const userId = req.user.id;
@@ -31,7 +31,7 @@ router.get('/:lessonId', authenticate, async (req, res) => {
 });
 
 // POST save a note for a specific lesson
-router.post('/:lessonId', authenticate, async (req, res) => {
+router.post('/:lessonId', requireAuth(), async (req, res) => {
   try {
     const { lessonId } = req.params;
     const { content } = req.body;
