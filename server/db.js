@@ -31,16 +31,26 @@ export const query = async (text, params) => {
   return pool.query(text, params);
 };
 
+export let dbError = null;
+
 export const getStatus = async () => {
   if (!pool) return 'mock-data';
   try {
     const res = await pool.query('SELECT 1');
     if (res) return 'connected';
   } catch (err) {
+    dbError = err.message;
     console.warn('Database health check failed:', err.message);
     return 'disconnected';
   }
   return 'disconnected';
 };
+
+// Also test the connection immediately
+if (pool) {
+  pool.query('SELECT 1').catch(err => {
+    dbError = err.message;
+  });
+}
 
 export { pool };
