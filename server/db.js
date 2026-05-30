@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const { Pool } = pg;
-const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+// Prioritize POSTGRES_URL (Vercel Integration Pooler URL) over DATABASE_URL (User's manual IPv6 URL)
+const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
 
 let pool = null;
 
