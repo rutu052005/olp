@@ -13,6 +13,7 @@ import assessmentsRouter from './routes/assessments.js';
 import certificatesRouter from './routes/certificates.js';
 import progressRouter from './routes/progress.js';
 import adminRouter from './routes/admin.js';
+import notesRouter from './routes/notes.js';
 
 dotenv.config();
 
@@ -69,6 +70,7 @@ app.use('/api/assessments', assessmentsRouter);
 app.use('/api/certificates', certificatesRouter);
 app.use('/api/progress', progressRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/notes', notesRouter);
 
 // Health check
 app.get('/api/health', async (_req, res) => {

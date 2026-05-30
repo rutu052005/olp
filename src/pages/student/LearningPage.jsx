@@ -5,7 +5,7 @@ import { useApp } from '../../contexts/AppContext';
 import Shell, { Page } from '../../components/layout/Shell';
 import Skeleton from '../../components/ui/Skeleton';
 import { ModuleAccordion } from '../public/CourseDetailPage';
-import { courseApi, progressApi } from '../../api/client';
+import { courseApi, progressApi, notesApi } from '../../api/client';
 
 function getEmbedUrl(url) {
   if (!url) return null;
@@ -36,6 +36,10 @@ export default function LearningPage() {
   const [activeModule, setActiveModule] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
 
+  // Note state
+  const [noteContent, setNoteContent] = useState('');
+  const [savingNote, setSavingNote] = useState(false);
+
   useEffect(() => {
     if (!currentUser) return;
     async function loadLearningData() {
@@ -62,6 +66,34 @@ export default function LearningPage() {
     }
     loadLearningData();
   }, [courseId, currentUser]);
+
+  // Fetch note when active lesson changes
+  useEffect(() => {
+    if (!activeLesson) return;
+    async function loadNote() {
+      try {
+        const res = await notesApi.get(activeLesson.id);
+        setNoteContent(res.data?.content || '');
+      } catch (err) {
+        console.warn('Failed to load note:', err);
+        // We don't want to crash or annoy the user on load failure, so just log warning
+      }
+    }
+    loadNote();
+  }, [activeLesson]);
+
+  const handleSaveNote = async () => {
+    if (!activeLesson) return;
+    setSavingNote(true);
+    try {
+      await notesApi.save(activeLesson.id, noteContent);
+      notify('Note saved securely!');
+    } catch (err) {
+      notify('Failed to save note. Please check your connection.');
+    } finally {
+      setSavingNote(false);
+    }
+  };
 
   const handleMarkComplete = async () => {
     if (!activeLesson || !activeModule || !course) return;
@@ -251,10 +283,21 @@ export default function LearningPage() {
                 {progressPercent}% Complete ({completedCount} / {totalLessonsCount} lessons)
               </div>
               <div className="mt-5 grid gap-4 md:grid-cols-2">
-                <textarea
-                  className="min-h-40 rounded-2xl border border-slate-200 bg-white p-4 outline-none dark:border-white/10 dark:bg-white/5"
-                  placeholder="Write private notes..."
-                />
+                <div className="flex flex-col gap-3">
+                  <textarea
+                    className="min-h-40 flex-1 rounded-2xl border border-slate-200 bg-white p-4 outline-none dark:border-white/10 dark:bg-white/5"
+                    placeholder="Write private notes..."
+                    value={noteContent}
+                    onChange={(e) => setNoteContent(e.target.value)}
+                  />
+                  <button 
+                    className="btn-secondary w-full"
+                    onClick={handleSaveNote}
+                    disabled={savingNote || !activeLesson}
+                  >
+                    {savingNote ? 'Saving...' : 'Save Note'}
+                  </button>
+                </div>
                 <div className="rounded-2xl bg-slate-50 p-4 dark:bg-white/5">
                   <h3 className="font-black">Resources</h3>
                   <button className="btn-secondary mt-4 w-full" onClick={handleDownloadResource}>

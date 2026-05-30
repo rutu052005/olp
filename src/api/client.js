@@ -60,4 +60,9 @@ export const adminApi = {
   table: (tableName) => api.get(`/admin/database/${tableName}`),
 };
 
+export const notesApi = {
+  get: (lessonId) => api.get(`/notes/${lessonId}`),
+  save: (lessonId, content) => api.post(`/notes/${lessonId}`, { content }),
+};
+
 export default api;

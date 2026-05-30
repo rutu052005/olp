@@ -164,3 +164,15 @@ CREATE INDEX idx_questions_assessment ON questions(assessment_id);
 CREATE INDEX idx_attempts_user_assessment ON assessment_attempts(user_id, assessment_id);
 CREATE INDEX idx_certificates_certificate_id ON certificates(certificate_id);
 CREATE INDEX idx_payments_user_course ON payments(user_id, course_id);
+
+CREATE TABLE student_notes (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  lesson_id BIGINT NOT NULL REFERENCES lessons(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (user_id, lesson_id)
+);
+
+CREATE INDEX idx_student_notes_user_lesson ON student_notes(user_id, lesson_id);
+
