@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { query, pool } from '../db.js';
+import { query, pool, dbError } from '../db.js';
 import { databaseTables } from '../../src/sampleData.js';
 import { requireAuth } from '../middleware/auth.js';
 import { validateRequest, registerSchema, loginSchema } from '../middleware/validate.js';
@@ -91,7 +91,6 @@ router.post('/login', validateRequest(loginSchema), async (req, res, next) => {
       return res.json({ user: profile, token: signUser(profile) });
     } else {
       // Mock Mode fallback
-      const { dbError, pool } = await import('../db.js');
       const user = databaseTables.users.rows.find((u) => u.email === email);
       if (!user) {
         return res.status(401).json({ message: 'Invalid email or password (Mock Mode). Pool: ' + !!pool + ' Error: ' + dbError });
