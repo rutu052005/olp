@@ -95,8 +95,12 @@ router.post('/login', validateRequest(loginSchema), async (req, res, next) => {
       if (!user) {
         return res.status(401).json({ message: 'Invalid email or password (Mock Mode). Pool: ' + !!pool + ' Error: ' + dbError });
       }
+      // Check password: if there's a hashed version in the mock table we can check it
+      if (user.password_hash) {
+        try {
+          const match = bcrypt.compareSync(password, user.password_hash);
+          if (!match) return res.status(401).json({ message: 'Invalid email or password (Mock Mode)' });
         } catch (e) {
-          // If password_hash is plain text
           if (user.password_hash !== password) {
             return res.status(401).json({ message: 'Invalid email or password (Mock Mode)' });
           }
