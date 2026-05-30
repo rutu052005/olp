@@ -37,7 +37,7 @@ export const courses = [
     rating: 4.9,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=lV8S5z8G2H8',
     outcomes: ['Design responsive React interfaces', 'Build REST APIs with secure auth', 'Model relational SQL schemas', 'Deploy a production workflow'],
   },
   {
@@ -55,7 +55,7 @@ export const courses = [
     rating: 4.8,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=t89KOSmG6U4',
     outcomes: ['Write clean Python programs', 'Use modules and packages', 'Automate file workflows', 'Build API-based mini projects'],
   },
   {
@@ -73,7 +73,7 @@ export const courses = [
     rating: 4.7,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=Oe421EPjeEQ',
     outcomes: ['Analyze time complexity', 'Implement core structures', 'Solve graph problems', 'Practice interview patterns'],
   },
   {
@@ -91,7 +91,7 @@ export const courses = [
     rating: 4.9,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/embed/kz184QIO4ZQ?si=q7XAvZ26UV5IQ--W',
+    promo_video_url: 'https://www.youtube.com/embed/RBSGKlAxfok',
     outcomes: ['Prepare training datasets', 'Evaluate model quality', 'Tune algorithms', 'Ship reproducible notebooks'],
   },
   {
@@ -109,7 +109,7 @@ export const courses = [
     rating: 4.6,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=rfscVS0vtbw',
     outcomes: ['Create normalized schemas', 'Write optimized SQL', 'Use indexes properly', 'Explain ACID transactions'],
   },
   {
@@ -127,7 +127,7 @@ export const courses = [
     rating: 4.7,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=HXV3zeQKqGY',
     outcomes: ['Apply discrete logic', 'Use matrices and vectors', 'Understand probability', 'Solve computing math problems'],
   },
   {
@@ -145,7 +145,7 @@ export const courses = [
     rating: 4.8,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=lV8S5z8G2H8',
     outcomes: ['Deploy cloud services', 'Design CI/CD pipelines', 'Use containers', 'Monitor infrastructure'],
   },
   {
@@ -163,7 +163,7 @@ export const courses = [
     rating: 4.8,
     language: 'English',
     status: 'published',
-    promo_video_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+    promo_video_url: 'https://www.youtube.com/watch?v=ENrzD9HAZK4',
     outcomes: ['Identify common threats', 'Secure web inputs', 'Understand cryptography', 'Build security checklists'],
   },
 ];
