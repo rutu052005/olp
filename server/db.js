@@ -14,6 +14,7 @@ if (connectionString) {
     max: 10,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 5000,
+    ssl: connectionString.includes('localhost') ? false : { rejectUnauthorized: false }
   });
 
   pool.on('error', (err) => {
