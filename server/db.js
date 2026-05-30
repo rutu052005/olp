@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const { Pool } = pg;
-const connectionString = process.env.DATABASE_URL;
+const connectionString = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 
 let pool = null;
 
